@@ -1,0 +1,19 @@
+{
+ "argv": [
+  "/Users/jungseungwoo/Desktop/data-mini-project/.venv/bin/python",
+  "-Xfrozen_modules=off",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ],
+ "display_name": "data-mini-project (.venv)",
+ "language": "python",
+ "metadata": {
+  "debugger": true,
+  "supported_encryption": [
+   "curve"
+  ]
+ },
+ "kernel_protocol_version": "5.5"
+}

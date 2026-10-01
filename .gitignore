@@ -2,3 +2,5 @@
 *.mat
 .DS_Store
 .code/
+data/cache/
+.venv/
