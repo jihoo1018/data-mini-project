@@ -1,0 +1,56 @@
+{
+  "version": "v1",
+  "sklearn_version": "1.9.1",
+  "imputer": {
+    "class_name": "SimpleImputer",
+    "strategy": "median",
+    "fit_scope": "each CV train fold only"
+  },
+  "scaler": {
+    "class_name": "StandardScaler",
+    "applied_models": [
+      "Elastic Net",
+      "Linear Regression",
+      "Ridge"
+    ],
+    "fit_scope": "each CV train fold only"
+  },
+  "unscaled_models": [
+    "Gradient Boosting",
+    "Median Baseline",
+    "Random Forest"
+  ],
+  "pipeline_steps_by_model": {
+    "Median Baseline": [
+      "imputer",
+      "model"
+    ],
+    "Linear Regression": [
+      "imputer",
+      "scaler",
+      "model"
+    ],
+    "Ridge": [
+      "imputer",
+      "scaler",
+      "model"
+    ],
+    "Elastic Net": [
+      "imputer",
+      "scaler",
+      "model"
+    ],
+    "Random Forest": [
+      "imputer",
+      "model"
+    ],
+    "Gradient Boosting": [
+      "imputer",
+      "model"
+    ]
+  },
+  "deltaQ_logvar": {
+    "already_log_transformed": true,
+    "additional_log_transform": false
+  }
+}

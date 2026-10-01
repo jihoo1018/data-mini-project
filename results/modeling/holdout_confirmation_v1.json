@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "selection_locked_before_holdout": true,
+  "holdout_review_count": 1,
+  "batch2_test_used": false,
+  "selected_model": "Linear Regression",
+  "selected_feature_set": "A_deltaQ_logvar",
+  "selected_features": [
+    "deltaQ_logvar"
+  ],
+  "holdout": {
+    "mape_pct": 11.6314634893,
+    "mae": 111.9543091586,
+    "rmse": 138.748110422,
+    "r2": 0.4673670003,
+    "gap_cv_valid_pp": 4.0337048435,
+    "improvement_vs_baseline_pp": 4.4828230436
+  },
+  "post_holdout_model_change_allowed": false
+}
