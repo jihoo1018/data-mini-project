@@ -1,0 +1,80 @@
+{
+  "version": "v1",
+  "post_test_interpretation_only": true,
+  "model_or_feature_changed_after_test": false,
+  "deltaq_life_relationship_batch1": {
+    "pearson_r": -0.8861231037,
+    "pearson_p": 2.7e-16,
+    "spearman_rho": -0.871160727,
+    "spearman_p": 3.485e-15,
+    "linear_slope_cycles_per_deltaq_logvar_unit": -432.5033438291,
+    "linear_slope_cycles_per_0_1_increase": -43.2503343829
+  },
+  "batch2_short_life": {
+    "batch1_min_cycle_life": 534.0,
+    "short_life_cells": 30,
+    "total_labeled_cells": 39,
+    "short_life_share_pct": 76.9230769231,
+    "overpredicted_short_life_cells": 30,
+    "overprediction_rate_pct": 100.0
+  },
+  "batch2_ape": {
+    "short_life_mean_ape_pct": 36.7276267072,
+    "short_life_median_ape_pct": 37.7636543239,
+    "in_range_mean_ape_pct": 14.2005518605,
+    "in_range_median_ape_pct": 14.2092980643,
+    "life_ape_pearson_r": -0.6133398125,
+    "life_ape_spearman_rho": -0.5796133242
+  },
+  "distribution_shift": {
+    "batch1_target_mean": 844.7173913043,
+    "batch2_target_mean": 565.7435897436,
+    "batch1_target_median": 858.5,
+    "batch2_target_median": 472.0,
+    "target_standardized_mean_difference": -1.3763077319,
+    "target_ks_statistic": 0.7692307692,
+    "target_ks_p": 6.63137e-13,
+    "batch1_deltaq_logvar_mean": -3.9229959343,
+    "batch2_deltaq_logvar_mean": -3.5958419615,
+    "deltaq_standardized_mean_difference": 0.8483373765,
+    "deltaq_ks_statistic": 0.5914158305,
+    "deltaq_ks_p": 2.085589111e-07
+  },
+  "complex_model_comparison": {
+    "Ridge": {
+      "best_feature_set": "B_deltaQ_shape",
+      "cv_mape_mean_pct": 8.8958806433,
+      "cv_mape_std_pct": 2.6917773261,
+      "gap_vs_linear_pp": 1.2981219975
+    },
+    "Elastic Net": {
+      "best_feature_set": "C_exploratory_aux",
+      "cv_mape_mean_pct": 8.8045717257,
+      "cv_mape_std_pct": 1.7487393868,
+      "gap_vs_linear_pp": 1.20681308
+    },
+    "Random Forest": {
+      "best_feature_set": "A_deltaQ_logvar",
+      "cv_mape_mean_pct": 9.6584045603,
+      "cv_mape_std_pct": 3.8475474558,
+      "gap_vs_linear_pp": 2.0606459145
+    },
+    "Gradient Boosting": {
+      "best_feature_set": "A_deltaQ_logvar",
+      "cv_mape_mean_pct": 9.4209958473,
+      "cv_mape_std_pct": 4.1468587238,
+      "gap_vs_linear_pp": 1.8232372015
+    }
+  },
+  "limitations": {
+    "batch1_labeled_cells": 46,
+    "batch1_policy_count": 23,
+    "cells_per_policy_min": 1,
+    "cells_per_policy_max": 3,
+    "batch2_unlabeled_cells": 8,
+    "batch3_labeled_cells": 44,
+    "batch3_unlabeled_cells": 2,
+    "batch3_max_cycle_life": 1935.0,
+    "newstructure_available_in_feature_table": false
+  }
+}
