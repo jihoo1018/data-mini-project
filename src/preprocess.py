@@ -21,7 +21,7 @@ def run(n):
     for i in range(b['summary'].shape[0]):
         s = f[b['summary'][i, 0]]
         d = {k: s[k][0] for k in S_KEYS}
-        life = int(f[b['cycle_life'][i, 0]][0, 0])
+        life = float(f[b['cycle_life'][i, 0]][0, 0])  # 수명 미확정 셀은 NaN
         pol = text(f, b['policy_readable'][i, 0])
         for c in range(len(d['QDischarge'])):
             rows.append(dict(batch=n, cell=i, cycle=c + 1, cycle_life=life, policy=pol,
