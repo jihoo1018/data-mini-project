@@ -1,0 +1,31 @@
+{
+  "version": "v1",
+  "primary_metric": "MAPE",
+  "mape_unit": "%",
+  "gap_unit": "%p",
+  "positive_gap_meaning": "performance degradation at the later stage",
+  "definitions": {
+    "gap_train_valid": "valid_mape - train_cv_mape_mean",
+    "gap_valid_test": "test_mape - valid_mape",
+    "gap_target_test": "test_mape - 9.1"
+  },
+  "values": {
+    "train_cv_mape_mean_pct": 7.5977586457,
+    "train_cv_mape_std_pct": 1.5736934276,
+    "valid_mape_pct": 11.6314634893,
+    "test_mape_pct": 31.5290709733,
+    "gap_train_valid_pp": 4.0337048435,
+    "gap_valid_test_pp": 19.8976074841,
+    "gap_target_test_pp": 22.4290709733
+  },
+  "regression_metrics": [
+    "MAPE",
+    "MAE",
+    "RMSE",
+    "R2"
+  ],
+  "classification_metrics_not_used": [
+    "F1-score",
+    "Accuracy"
+  ]
+}
