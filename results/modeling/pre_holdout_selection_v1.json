@@ -1,0 +1,28 @@
+{
+  "version": "v1",
+  "selection_data": "Batch 1 Train Group CV only",
+  "holdout_used_for_selection": false,
+  "batch2_test_used": false,
+  "simplicity_tolerance_pp": 1.0,
+  "selected_model": "Linear Regression",
+  "selected_feature_set": "A_deltaQ_logvar",
+  "selected_features": [
+    "deltaQ_logvar"
+  ],
+  "selected_model_parameters": {
+    "class_name": "LinearRegression",
+    "params": {}
+  },
+  "pipeline_steps": [
+    "imputer",
+    "scaler",
+    "model"
+  ],
+  "cv": {
+    "mape_mean_pct": 7.5977586457,
+    "mape_std_pct": 1.5736934276,
+    "train_mape_mean_pct": 7.2507917198,
+    "gap_train_cv_pp": 0.346966926
+  },
+  "decision": "Lowest Group CV MAPE; only non-baseline candidate within 1 percentage point of the CV best; one feature; linear interpretability and extrapolation capability"
+}

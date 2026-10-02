@@ -1,0 +1,7 @@
+구분,MAPE (%),비고
+Train (Batch 1 CV),7.60 ± 1.57,Group CV
+Valid (Batch 1 Hold-out),11.63,고정 policy Hold-out
+Test (Batch 2),31.53,최종 평가 1회
+Gap (Train–Valid),+4.03%p,Valid − Train; 양수: 과적합 의심
+Gap (Valid–Test),+19.90%p,Test − Valid; 양수: 배치 일반화 저하
+Gap (Target–Test),+22.43%p,Test − 9.1; 양수: 원논문보다 낮은 성능

@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "evaluation_count": 1,
+  "evaluated_at_utc": "2026-10-01T10:48:15.301045+00:00",
+  "training_data": "all 46 labeled Batch 1 cells",
+  "test_data": "all 39 labeled Batch 2 cells",
+  "final_model": "Linear Regression",
+  "final_feature_set": "A_deltaQ_logvar",
+  "final_features": [
+    "deltaQ_logvar"
+  ],
+  "test_mape_pct": 31.5290709733,
+  "test_mae": 155.5884517394,
+  "test_rmse": 169.5563152442,
+  "test_r2": 0.4023946567,
+  "gap_valid_test_pp": 19.8976074841,
+  "paper_target_mape_pct": 9.1,
+  "gap_target_test_pp": 22.4290709733,
+  "post_test_model_change_allowed": false
+}

@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "selection_data": "Batch 1 Train only",
+  "n_train_cells": 35,
+  "group_column": "policy",
+  "n_groups": 18,
+  "splitter": "GroupKFold",
+  "n_splits": 5,
+  "scoring": {
+    "primary": "MAPE",
+    "secondary": [
+      "MAE",
+      "RMSE",
+      "R2"
+    ]
+  },
+  "std_ddof": 1,
+  "return_train_score": true,
+  "valid_holdout_used": false,
+  "batch2_test_used": false
+}

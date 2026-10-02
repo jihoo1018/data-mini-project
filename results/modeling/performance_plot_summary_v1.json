@@ -1,0 +1,50 @@
+{
+  "version": "v1",
+  "batch1_holdout_cells": 11,
+  "batch2_test_cells": 39,
+  "batch1_min_cycle_life": 534.0,
+  "short_life_definition": "Batch 2 actual cycle_life below Batch 1 minimum",
+  "short_life_batch2_cells": 30,
+  "short_life_overpredicted_cells": 30,
+  "short_life_overprediction_rate_pct": 100.0,
+  "batch2_median_ape_pct": 30.1517159214,
+  "batch2_max_ape_pct": 71.6474738863,
+  "top_5_ape_cells": [
+    {
+      "cell_id": "b2c6",
+      "actual_cycle_life": 393.0,
+      "predicted_cycle_life": 674.574572,
+      "ape_pct": 71.647474
+    },
+    {
+      "cell_id": "b2c15",
+      "actual_cycle_life": 396.0,
+      "predicted_cycle_life": 668.61132,
+      "ape_pct": 68.841242
+    },
+    {
+      "cell_id": "b2c18",
+      "actual_cycle_life": 449.0,
+      "predicted_cycle_life": 751.241434,
+      "ape_pct": 67.314351
+    },
+    {
+      "cell_id": "b2c2",
+      "actual_cycle_life": 424.0,
+      "predicted_cycle_life": 644.389593,
+      "ape_pct": 51.978677
+    },
+    {
+      "cell_id": "b2c29",
+      "actual_cycle_life": 452.0,
+      "predicted_cycle_life": 665.149673,
+      "ape_pct": 47.157007
+    }
+  ],
+  "figure_files": [
+    "actual_vs_predicted_v1.png",
+    "residual_plot_v1.png",
+    "model_cv_comparison_v1.png",
+    "batch2_cell_ape_v1.png"
+  ]
+}
