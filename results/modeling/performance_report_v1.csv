@@ -1,0 +1,7 @@
+index,mape_pct,note
+Train (Batch 1 Group CV),7.5977586457334265,mean ± std = 7.60% ± 1.57%
+Valid (Batch 1 Hold-out),11.631463489256442,locked candidate internal generalization
+Test (Batch 2),31.52907097330912,single external batch evaluation
+Gap (Train-Valid),4.033704843523015,positive means Hold-out degradation
+Gap (Valid-Test),19.897607484052678,positive means batch generalization degradation
+Gap (Target-Test),22.429070973309123,paper target = 9.1%

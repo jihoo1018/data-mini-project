@@ -1,0 +1,2 @@
+model,feature_set,n_train_batch1,n_test_batch2,test_mape_pct,test_mae,test_rmse,test_r2,gap_valid_test_pp,paper_target_mape_pct,gap_target_test_pp
+Linear Regression,A_deltaQ_logvar,46,39,31.52907097330912,155.58845173936453,169.55631524424456,0.40239465672044605,19.897607484052678,9.1,22.429070973309123

@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "selection_data": "Batch 1 Train only",
+  "test_data_used_for_selection": false,
+  "sets": {
+    "A_deltaQ_logvar": [
+      "deltaQ_logvar"
+    ],
+    "B_deltaQ_shape": [
+      "deltaQ_logvar",
+      "deltaQ_skew",
+      "deltaQ_kurtosis"
+    ],
+    "C_exploratory_aux": [
+      "deltaQ_logvar",
+      "Tavg_mean_2_100",
+      "charge_time_mean_2_100",
+      "c_rate_1"
+    ]
+  }
+}

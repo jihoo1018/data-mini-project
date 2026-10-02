@@ -1,6 +1,9 @@
 .remember/
-*.mat
+data/*.mat
 .DS_Store
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
 .code/
 data/cache/
 .venv/

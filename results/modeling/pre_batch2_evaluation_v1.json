@@ -1,0 +1,31 @@
+{
+  "version": "v1",
+  "final_feature_set": "A_deltaQ_logvar",
+  "final_features": [
+    "deltaQ_logvar"
+  ],
+  "final_model": "Linear Regression",
+  "final_model_parameters": {
+    "class_name": "LinearRegression",
+    "params": {}
+  },
+  "pipeline_steps": [
+    "imputer",
+    "scaler",
+    "model"
+  ],
+  "preprocessing": {
+    "missing_values": "SimpleImputer(strategy='median')",
+    "scaling": "StandardScaler()",
+    "target_transform": "none",
+    "additional_feature_transform": "none; deltaQ_logvar is already log-transformed"
+  },
+  "project_random_state": 42,
+  "model_random_state": "not applicable to deterministic LinearRegression",
+  "refit_data": "all labeled Batch 1 cells",
+  "refit_cell_count": 46,
+  "test_data": "labeled Batch 2 cells",
+  "test_cell_count": 39,
+  "batch2_evaluated_at_lock_time": false,
+  "post_test_model_change_allowed": false
+}
