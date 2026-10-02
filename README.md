@@ -21,6 +21,8 @@
 | Test | Batch 2 | 모델 고정 후 최종 평가 1회 |
 | Additional | Batch 3 | EDA와 외삽 한계 확인, 모델 평가 제외 |
 
+Batch 3은 과제 안내(Batch 1 학습, Batch 2 테스트)의 평가 범위 밖이라 모델 평가에는 쓰지 않았습니다. DAY1 노트북 전략에 적었던 "Batch 3 외부 검증"은 이 범위에 맞춰 수행하지 않았습니다.
+
 ## 파일 구조
 
 ```text
@@ -99,7 +101,7 @@ jupyter lab
 
 ### ΔQ(V) 곡선 분석
 - Cycle 100 − Cycle 10의 방전용량 차이 곡선에서 단수명 셀의 ΔQ가 더 깊습니다(약 −0.06Ah 대 −0.01Ah).
-- `deltaQ_logvar`와 수명의 상관은 Batch 1/2/3에서 −0.89/−0.90/−0.70으로 유지됩니다(Batch 3 약화는 수명 1,600사이클 이상 초장수명 5셀 영향).
+- `deltaQ_logvar`와 수명의 Pearson 상관은 Batch 1/2/3에서 −0.89/−0.90/−0.70으로 유지됩니다(메인 EDA 노트북의 배치별 Spearman은 −0.87/−0.71/−0.80이며 방향은 같습니다). Batch 3 약화는 수명 1,600사이클 이상 초장수명 5셀 영향입니다.
 - **핵심 발견:** ΔQ 분산(`deltaQ_logvar`)이 세 배치에서 일관되게 수명과 강한 음의 관계를 보이는 유일한 핵심 Feature다.
 
 ### 충전 속도(C-rate)와 수명의 관계
@@ -217,8 +219,13 @@ Batch 2 보조 지표는 MAE 155.59 cycles, RMSE 169.56 cycles, R² 0.402입니�
 
 ## DAY1 전략 대비 실제 결과
 
+DAY1 노트북(`01_DAY1_EDA.ipynb`)의 "최종 모델 설계 전략"은 입력을 ΔQ(V)·Qd·IR·온도·충전시간·충전정책의 다변수로, 후보를 중앙값 baseline → Elastic Net → Random Forest/Gradient Boosting으로, Batch 3을 외부 검증으로 두었습니다. DAY2에서 EDA와 가설 검증 결과를 반영해 아래 세 가지를 **수정**했고, 나머지 전략은 그대로 구현했습니다.
+
 | DAY1 전략 및 예상 | DAY2 실제 결과 | 판단과 원인 |
 |---|---|---|
+| 입력: ΔQ(V)·Qd·IR·온도·충전시간·충전정책 다변수 | `deltaQ_logvar` 1개만 사용 | 전략 수정: 온도·충전시간·C-rate는 배치마다 부호·크기가 달라졌고(EDA), 가설 H1 검증에서 보조 Feature가 선형 계열 성능을 오히려 낮춰 단일 Feature로 좁힘 |
+| 후보 모델: 중앙값 baseline → Elastic Net → RF/GB | Linear Regression·Ridge를 추가한 6개 후보 | 전략 확장: 단일 Feature에서는 Elastic Net의 변수 선택 이점이 없어 단순 선형이 최종 선택 |
+| Batch 3 외부 검증 | Batch 3은 EDA·한계 확인에만 사용 | 범위 조정: 과제의 모델링 평가 범위가 Batch 1 학습·Batch 2 테스트이므로 Batch 3은 모델 평가에서 제외 |
 | `deltaQ_logvar` 단독 모델이 보조변수 추가 모델보다 안정적일 것이다 | Linear Regression이 7.60±1.57%로 가장 우수 | 적중: 보조변수의 배치 관계가 불안정하고 소표본에서 추가 실익이 없었음 |
 | policy 단위 Group CV로 누수를 방지한다 | GroupKFold와 policy Hold-out 적용 | 적중: 같은 policy가 Train·Valid에 섞이지 않음 |
 | 선형모델이 트리 모델보다 외삽에 유리할 것이다 | 선형회귀의 CV 평균과 변동성이 더 낮았고, 별도 외삽 검증에서도 트리는 양 끝에서 선형보다 더 틀림(위 외삽 검증) | 적중: 트리 모델은 외삽과 소표본에 불리했음. 단, 선형도 단수명 영역을 과대예측해 Batch 2 성능 저하를 막지는 못함 |
