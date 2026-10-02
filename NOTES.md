@@ -31,6 +31,40 @@
 | v0.12 | 18:22 | 선형(입력 A) 확정 → Batch 1 전체로 학습 → **Batch 2 평가 1회**(`02_MODEL_V2.ipynb` 7번 섹션): MAPE 31.5%, 짧은 덩어리 과대예측. 아래 v0.12 상세 |
 | v0.13 | 10-02 | `02_MODEL_V2.ipynb` 8~11번 섹션 + 부록: 회귀 Reporting format(8번, Train/Valid/Test + Gap 3종), 배치 간 차이 확인(9번, 새 학습 없음), 시사점 정리(10번), 팀원 결과 비교(11번), **부록: 논문 비교용 분류**(Batch 2 예측에 550 기준 적용, 1−Acc 59.0%, 본 분석 아님). 코드 셀마다 팀원용 "설명" 셀 추가. 새 학습·재평가 없음 |
 
+### Part1 병렬 DAY2 버전 이력: `02_DAY2_Modeling.ipynb`
+
+> 위 `v0.1~v0.13`은 기존 `02_MODEL_V2.ipynb` 작업 이력이다. 아래 기록은 이를 덮어쓰지 않고, Part1에서 독립적으로 진행한 `02_DAY2_Modeling.ipynb`의 개발 과정을 `P1-D2-v0.x`로 구분해 추가한 것이다. 두 작업은 Hold-out policy와 CV 세부 방식이 달라 Train·Valid 숫자를 직접 합치지 않고 나란히 비교한다.
+
+| 버전 | 날짜 | 커밋 | 내용 |
+|---|---|---|---|
+| P1-D2-v0.1 | 10-01 | `749b7e3` | 데이터 역할 고정, `split_manifest_v1.csv`, policy 5종(11셀) Hold-out, Train 내부 `GroupKFold(5)`, 누수 변수 차단, Feature Set A·B·C와 6개 후보 모델 비교, Hold-out 확인 구현. Batch 1 CV 7.60±1.57%, Valid 11.63% |
+| P1-D2-v0.2 | 10-01 | `12f1a8d` | 최종 모델을 Linear Regression + `deltaQ_logvar` 1개로 잠근 뒤 Batch 1 전체 46셀로 재학습, Batch 2 라벨 39셀을 1회 평가. Test MAPE 31.53%, MAE 155.59, RMSE 169.56, R² 0.402 |
+| P1-D2-v0.3 | 10-01 | `0fb97b6` | Train·Valid·Test와 Gap 3종을 회귀 Reporting format으로 정리. Train–Valid +4.03%p, Valid–Test +19.90%p, Target–Test +22.43%p |
+| P1-D2-v0.4 | 10-01 | `43429c9` | 실제값–예측값, 잔차, 후보 모델 CV 비교, Batch 2 셀별 APE 그래프 추가. Batch 1 최소 수명 아래의 Batch 2 셀 30개가 모두 과대예측됨을 수치로 확인 |
+| P1-D2-v0.5 | 10-01 | `89e9e71` | 초기 ΔQ와 수명의 관계, 단수명 외삽, 트리 모델 한계, Batch 1–2 분포 이동, ESS 운영 활용 범위와 데이터·개발 한계를 정리 |
+| P1-D2-v0.6 | 10-02 | `ac5fbf5` | 제출 구조를 `README.md`, `notebooks/01_DAY1_EDA.ipynb`, `notebooks/02_DAY2_Modeling.ipynb`, `outputs/`, `results/modeling/` 중심으로 정리하고 핵심 결과 파일을 고정 |
+| P1-D2-v0.7 | 10-02 | `a909fe1` | 중복 코드를 `src/modeling_utils.py`로 분리하고 노트북 흐름을 간결화. 최종 모델의 Batch 1 전체 재학습을 노트북에 직접 표시하고 README의 모델 선정 근거·성과·한계를 정리 |
+| P1-D2-v0.8 | 10-02 | `273d9e7` | 원논문의 550사이클은 분류 기준이고 회귀 관측 구간은 본 분석과 동일한 초기 100사이클임을 확인. 9.1% 대비 성능 차이를 Feature 구성, 분할, 배치 이동, 단수명 외삽과 소표본으로 구분해 기록 |
+| P1-D2-v0.9 | 10-02 | `aa1eef5` | 팀원 비교를 위해 모델 개발 과정, 분할 이유, 후보 모델, 성능, 오류 분석과 최종 Pipeline 선택 기준을 `docs/TEAM_MODEL_DEVELOPMENT_SUMMARY.md`로 정리 |
+
+### DAY2 두 모델 통합 메모
+
+**공통으로 확인된 결론**
+
+- 두 작업 모두 `cycle_life` 회귀를 선택하고 초기 ΔQ 분산의 로그값 1개(`dQ_log_var` / `deltaQ_logvar`)를 사용한 단순 선형회귀를 최종 모델로 선택했다.
+- 동일 policy 셀이 학습과 검증에 섞이지 않도록 policy 단위 분할과 Group CV를 사용했다.
+- 두 구현의 Batch 2 Test MAPE는 31.5%와 31.53%로 사실상 같아 Feature 계산과 최종 예측 구현이 일관됨을 확인했다.
+- Batch 2 성능 저하는 복잡한 모델 부족보다 Batch 1에 짧은 수명 학습 사례가 부족한 외삽 문제와 배치 분포 이동의 영향이 컸다.
+- 정확한 교체 시점 결정에는 오차가 크므로, 초기 위험 셀 선별과 추가 장기시험 우선순위 결정의 보조 도구로 활용 범위를 제한한다.
+
+**합치지 않고 구분해서 보고할 항목**
+
+- `02_MODEL_V2.ipynb`: CV 7.3%, Hold-out 13.1%, Batch 2 31.5%
+- `02_DAY2_Modeling.ipynb`: Group CV 7.60±1.57%, Hold-out 11.63%, Batch 2 31.53%
+- 두 작업은 Hold-out 5개 policy 중 2개가 다르고 CV 반복·분할 방식도 다르므로 Train·Valid 수치를 평균내거나 우열로 직접 해석하지 않는다.
+- 팀 최종 Pipeline은 Batch 2 점수만으로 고르지 않고 Batch 1 내부검증의 평균·변동성, 누수 통제, Feature 의미, 외삽과 설명 가능성을 기준으로 결정한다.
+- 두 작업 모두 이미 Batch 2 결과를 확인했으므로 이후 변경은 현재 Test 성능 개선이 아니라 별도의 후속 실험으로 구분한다.
+
 ### v0.5 상세: 검증하면서 바로잡은 것
 
 노트북에는 **이미 모든 정정이 반영**돼 있음(남은 "초안" 표시 없음, 16:15 확인). 아래 표는 초안(v0.3)에서 그래프·출력과 맞지 않았거나 과했던 부분이 **무엇이 어떻게 바뀌었는지의 기록**이며, 보고서는 노트북 문장을 그대로 쓰면 됨.
