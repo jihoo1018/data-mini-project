@@ -142,7 +142,7 @@ selected_features = ["deltaQ_logvar"]
 | Gap (Valid–Test) | +19.90%p | Test − Valid; 양수: 배치 일반화 저하 |
 | Gap (Target–Test) | +22.43%p | Test − 9.1; 양수: 원논문보다 낮은 성능 |
 
-Batch 2 보조 지표는 MAE 155.59 cycles, RMSE 169.56 cycles, R² 0.402입니다. 원논문 Target 9.1%와의 차이는 Batch 2의 단수명 외삽, 핵심 Feature 분포 이동, Batch 1의 소표본, 원논문과의 데이터 정제·Feature 계산·평가 범위 차이로 해석했습니다.
+Batch 2 보조 지표는 MAE 155.59 cycles, RMSE 169.56 cycles, R² 0.402입니다. 원논문의 550사이클은 분류의 장·단수명 기준이며 회귀 관측 구간이 아닙니다. 원논문 회귀와 본 분석은 모두 초기 100사이클 정보를 사용하므로, Target 9.1%와의 차이는 Batch 2의 단수명 외삽, 핵심 Feature 분포 이동, Batch 1의 소표본, Feature 구성과 데이터 정제·분할·평가 범위 차이로 해석했습니다.
 
 성능 그래프:
 
