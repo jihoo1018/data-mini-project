@@ -76,6 +76,8 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
+`requirements.txt`에 주요 라이브러리 버전을 고정했습니다(h5py 3.16.0, NumPy 2.4.6, pandas 3.0.6, SciPy 1.17.1, Matplotlib 3.11.2, seaborn 0.13.2, scikit-learn 1.9.1, jupyter 1.1.1, mat73 0.65). 개발에는 Python 3.11.15를 사용했고 모든 확률적 설정은 `random_state=42`입니다.
+
 실행 순서:
 
 1. `notebooks/01_DAY1_EDA.ipynb` (원본 `.mat`가 있을 때)
