@@ -34,7 +34,7 @@ python src/preprocess.py 3
 
 ## 3. 사용
 
-노트북(`notebooks/01_EDA.ipynb`)은 `data/cache/`의 파일을 읽습니다.
+서브 노트북(`notebooks/01_DAY1_EDA_sub.ipynb`, `notebooks/02_hypothesis_H1_H2.ipynb`)은 `data/cache/`의 파일을 읽습니다. 메인 EDA(`01_DAY1_EDA.ipynb`)는 원본 `.mat`를 직접 읽고, 모델링(`02_DAY2_Modeling.ipynb`)은 `results/battery_eda/cell_features.csv`를 읽습니다.
 
 ```python
 df = pd.read_csv('../data/cache/batch1_summary.csv')
