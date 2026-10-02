@@ -1,0 +1,7 @@
+model,feature_set,cv_mape_mean_pct,cv_mape_std_pct
+Median Baseline,A_deltaQ_logvar,21.1281608665,8.3816447010
+Linear Regression,A_deltaQ_logvar,7.5977586457,1.5736934276
+Ridge,B_deltaQ_shape,8.8958806433,2.6917773261
+Elastic Net,C_exploratory_aux,8.8045717257,1.7487393868
+Random Forest,A_deltaQ_logvar,9.6584045603,3.8475474558
+Gradient Boosting,A_deltaQ_logvar,9.4209958473,4.1468587238
